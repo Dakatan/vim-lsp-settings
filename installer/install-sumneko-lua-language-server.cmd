@@ -1,8 +1,8 @@
 @echo off
 
 setlocal
-set VERSION=1.12.1
-curl -L -o "vscode-lua.vsix" "https://github.com/sumneko/vscode-lua/releases/download/v%VERSION%/lua-%VERSION%.vsix"
+for /f "usebackq" %%V in (`curl -Ls -o nul -w %{url_effective} https://github.com/sumneko/vscode-lua/releases/latest`) do set VERSION=%%~nxV
+curl -L -o "vscode-lua.vsix" "https://github.com/sumneko/vscode-lua/releases/download/%VERSION%/lua-%VERSION:~1%.vsix"
 
 call "%~dp0\run_unzip.cmd" vscode-lua.vsix
 del vscode-lua.vsix

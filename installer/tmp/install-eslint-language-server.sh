@@ -3,7 +3,8 @@
 set -e
 
 version=$(basename $(curl -Ls -o /dev/null -w %{url_effective} https://github.com/microsoft/vscode-eslint/releases/latest))
-url="https://github.com/microsoft/vscode-eslint/releases/download/release%2F$version-next.1/vscode-eslint-$version.vsix"
+url="https://github.com/microsoft/vscode-eslint/archive/refs/tags/release/$version.zip"
+echo $url
 asset="vscode-eslint.vsix"
 curl -L "$url" -o "$asset"
 unzip "$asset"

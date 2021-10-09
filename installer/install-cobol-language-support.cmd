@@ -1,7 +1,7 @@
 @echo off
 
 setlocal
-set version=0.9.1
+for /f "usebackq" %%V in (`curl -Ls -o nul -w %{url_effective} https://github.com/eclipse/che-che4z-lsp-for-cobol/releases/latest`) do set version=%%~nxV
 set url=https://github.com/eclipse/che-che4z-lsp-for-cobol/releases/download/%version%/cobol-language-support-%version%.vsix
 curl -LO "%url%"
 call "%~dp0\run_unzip.cmd" "cobol-language-support-%version%.vsix"

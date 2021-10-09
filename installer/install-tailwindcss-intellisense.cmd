@@ -1,8 +1,8 @@
 @echo off
 
 setlocal
-set VERSION=0.5.10
-curl -L -o "vscode-tailwindcss.vsix" "https://github.com/tailwindlabs/tailwindcss-intellisense/releases/download/v%VERSION%/vscode-tailwindcss-%VERSION%.vsix"
+for /f "usebackq" %%V in (`curl -Ls -o nul -w %{url_effective} https://github.com/tailwindlabs/tailwindcss-intellisense/releases/latest`) do set VERSION=%%~nxV
+curl -L -o "vscode-tailwindcss.vsix" "https://github.com/tailwindlabs/tailwindcss-intellisense/releases/download/%VERSION%/vscode-tailwindcss-%VERSION:~1%.vsix"
 
 call "%~dp0\run_unzip.cmd" vscode-tailwindcss.vsix
 rem del vscode-tailwindcss.vsix

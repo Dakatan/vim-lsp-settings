@@ -1,7 +1,7 @@
 @echo off
 
 setlocal
-set VERSION=0.5.2
+for /f "usebackq" %%V in (`curl -Ls -o nul -w %{url_effective} https://github.com/fwcd/kotlin-language-server/releases/latest`) do set VERSION=%%~nxV
 curl -L -o server.zip "https://github.com/fwcd/kotlin-language-server/releases/download/%VERSION%/server.zip"
 call "%~dp0\run_unzip.cmd" server.zip
 del server.zip

@@ -1,8 +1,8 @@
 @echo off
 
 setlocal
-set VERSION=2.1.0
-curl -L -o PowerShellEditorServices.zip "https://github.com/PowerShell/PowerShellEditorServices/releases/download/v%VERSION%/PowerShellEditorServices.zip"
+for /f "usebackq" %%V in (`curl -Ls -o nul -w %{url_effective} https://github.com/PowerShell/PowerShellEditorServices/releases/latest`) do set VERSION=%%~nxV
+curl -L -o PowerShellEditorServices.zip "https://github.com/PowerShell/PowerShellEditorServices/releases/download/%VERSION:~1%/PowerShellEditorServices.zip"
 call "%~dp0\run_unzip.cmd" PowerShellEditorServices.zip
 del PowerShellEditorServices.zip
 if not exist "%~dp0session" mkdir "%~dp0session"
